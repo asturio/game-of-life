@@ -5,7 +5,8 @@ import java.util.List;
 
 public interface GameOfLifeView {
 
-    String LIVE = "\u25a0";
+    @SuppressWarnings("UnnecessaryUnicodeEscape")
+    String LIVE = "\u25a0"; // "■"
     String DEAD = " ";
 
     static List<String> getFieldLines(short[][] shortsField) {
