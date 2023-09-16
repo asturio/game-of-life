@@ -37,6 +37,7 @@ class LanternaViewTest {
         when(gameOfLife.getField()).thenReturn(new short[1][1]);
         // when
         LanternaView view = new LanternaView(gameOfLife);
+        view.setDelayMillis(0);
         // then
         assertThatNoException().isThrownBy(view::drawField);
     }
@@ -47,10 +48,8 @@ class LanternaViewTest {
         when(gameOfLife.getRows()).thenReturn(1);
         when(gameOfLife.getColumns()).thenReturn(1);
         when(gameOfLife.stillRunning()).thenReturn(true, false);
-        LanternaView view = new LanternaView(gameOfLife) {
-            @Override
-            public void delay() {/* do nothing */}
-        };
+        LanternaView view = new LanternaView(gameOfLife);
+        view.setDelayMillis(0);
         assertThatNoException().isThrownBy(view::playGame);
     }
 
@@ -59,8 +58,9 @@ class LanternaViewTest {
         when(gameOfLife.getRows()).thenReturn(1);
         when(gameOfLife.getColumns()).thenReturn(1);
         LanternaView view = new LanternaView(gameOfLife);
+        view.setDelayMillis(200);
 
-        assertThat(view.getDelayMillis()).isBetween(0L, 2_000L);
+        assertThat(view.getDelayMillis()).isBetween(0L, 400L);
     }
 
     @Test

@@ -21,6 +21,7 @@ public class CliViewTest {
     @Test
     void constructor() {
         CliView view = new CliView(null, null);
+        view.setDelayMillis(3);
         assertThat(view).isNotNull();
     }
 
@@ -30,6 +31,7 @@ public class CliViewTest {
         when(gameOfLife.getField()).thenReturn(new short[][]{{0}});
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         CliView view = new CliView(gameOfLife, new PrintStream(outContent));
+        view.setDelayMillis(0);
         // when
         view.drawField();
         // then
@@ -48,6 +50,7 @@ public class CliViewTest {
         when(gameOfLife.getField()).thenReturn(new short[][]{{0}});
         when(gameOfLife.stillRunning()).thenReturn(true, false);
         CliView view = new CliView(gameOfLife, System.out);
+        view.setDelayMillis(0);
         // then
         assertThatNoException().isThrownBy(view::playGame);
     }

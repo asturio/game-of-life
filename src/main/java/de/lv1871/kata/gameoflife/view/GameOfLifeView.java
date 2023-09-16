@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface GameOfLifeView {
+
+    String LIVE = "\u25a0";
+    String DEAD = " ";
+
     static List<String> getFieldLines(short[][] shortsField) {
         List<String> result = new ArrayList<>();
         if (shortsField == null) {
@@ -15,7 +19,7 @@ public interface GameOfLifeView {
                 if (!line.isEmpty()) {
                     line.append(" ");
                 }
-                line.append(cell != 0 ? "\u25a0" : " ");
+                line.append(cell != 0 ? LIVE : DEAD);
             }
             result.add(line.toString());
         }

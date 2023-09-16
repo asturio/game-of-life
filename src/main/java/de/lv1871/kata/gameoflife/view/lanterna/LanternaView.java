@@ -15,6 +15,7 @@ public class LanternaView implements GameOfLifeView {
 
     private final GameOfLife gameOfLife;
     private final Terminal terminal;
+    private long delayMillis = 500;
 
     public LanternaView(GameOfLife gameOfLife) {
         this.gameOfLife = gameOfLife;
@@ -78,6 +79,10 @@ public class LanternaView implements GameOfLifeView {
 
     @Override
     public long getDelayMillis() {
-        return 500;
+        return delayMillis;
+    }
+
+    void setDelayMillis(long delayMillis) {
+        this.delayMillis = delayMillis;
     }
 }
