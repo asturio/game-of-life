@@ -36,7 +36,7 @@ public class GameOfLifeViewTest {
         // when
         List<String> lines = GameOfLifeView.getFieldLines(shortsField);
         // then
-        assertThat(lines).containsExactly(". . .", ". . .", ". . .");
+        assertThat(lines).containsExactly("     ", "     ", "     ");
     }
 
     @Test
@@ -46,7 +46,7 @@ public class GameOfLifeViewTest {
         // when
         List<String> lines = GameOfLifeView.getFieldLines(shortsField);
         // then
-        assertThat(lines).containsExactly(". . *", ". . .", ". . .");
+        assertThat(lines).containsExactly("    \u25a0", "     ", "     ");
     }
 
     @Test

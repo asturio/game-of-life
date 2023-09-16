@@ -36,7 +36,7 @@ public class CliViewTest {
         assertThat(outContent.toString()).isEqualTo(
                 """
                         +-+
-                        |.|
+                        | |
                         +-+
                         ===
                         """);

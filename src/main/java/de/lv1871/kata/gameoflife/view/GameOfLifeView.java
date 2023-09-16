@@ -15,7 +15,7 @@ public interface GameOfLifeView {
                 if (!line.isEmpty()) {
                     line.append(" ");
                 }
-                line.append(cell != 0 ? "*" : ".");
+                line.append(cell != 0 ? "\u25a0" : " ");
             }
             result.add(line.toString());
         }
