@@ -33,11 +33,13 @@ public class CliViewTest {
         // when
         view.drawField();
         // then
-        assertThat(outContent.toString()).isEqualTo(""
-            + "+-+\n"
-            + "|.|\n"
-            + "+-+\n"
-            + "===\n");
+        assertThat(outContent.toString()).isEqualTo(
+                """
+                        +-+
+                        |.|
+                        +-+
+                        ===
+                        """);
     }
 
     @Test
