@@ -5,6 +5,9 @@ public class Lv1871GameOfLife implements GameOfLife {
         if (field == null) {
             throw new IllegalArgumentException("Field may not be null");
         }
+        if (field.length == 0 || field[0].length == 0) {
+            throw new IllegalArgumentException("Field must have at least one row and one column");
+        }
 
     }
 
