@@ -2,6 +2,8 @@
 
 The Game of Life
 
+Wikipedia: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+
 # Rules
 
 1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
