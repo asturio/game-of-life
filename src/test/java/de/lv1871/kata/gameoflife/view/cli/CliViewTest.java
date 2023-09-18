@@ -1,20 +1,20 @@
 package de.lv1871.kata.gameoflife.view.cli;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.mockito.Mockito.when;
+
 import de.lv1871.kata.gameoflife.GameOfLife;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 public class CliViewTest {
+
     @Mock
     private GameOfLife gameOfLife;
 
@@ -45,7 +45,7 @@ public class CliViewTest {
     }
 
     @Test
-    void playGame()  {
+    void playGame() {
         // given
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         when(gameOfLife.getField()).thenReturn(new short[][]{{0}});

@@ -7,7 +7,6 @@ import com.googlecode.lanterna.terminal.Terminal;
 import de.lv1871.kata.gameoflife.GameOfLife;
 import de.lv1871.kata.gameoflife.GameOfLifeException;
 import de.lv1871.kata.gameoflife.view.GameOfLifeView;
-
 import java.io.IOException;
 import java.util.List;
 

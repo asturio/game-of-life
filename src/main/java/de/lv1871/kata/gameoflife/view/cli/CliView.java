@@ -2,7 +2,6 @@ package de.lv1871.kata.gameoflife.view.cli;
 
 import de.lv1871.kata.gameoflife.GameOfLife;
 import de.lv1871.kata.gameoflife.view.GameOfLifeView;
-
 import java.io.PrintStream;
 import java.util.List;
 

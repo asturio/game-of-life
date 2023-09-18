@@ -1,12 +1,13 @@
 package de.lv1871.kata.gameoflife;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assumptions.assumeThat;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 class DummyGameOfLifeTest {
+
     private DummyGameOfLife game;
 
     @BeforeEach

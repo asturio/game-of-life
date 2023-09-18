@@ -5,6 +5,7 @@ import de.lv1871.kata.gameoflife.view.cli.CliView;
 import de.lv1871.kata.gameoflife.view.lanterna.LanternaView;
 
 public class GameOfLifeStarter {
+
     private static final boolean USE_LANTERNA = false;
 
     public static void main(String[] args) {

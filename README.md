@@ -14,7 +14,7 @@ Wikipedia: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 # How to run
 
-Modify the code in GameOfLifeStarter.java to create a game of life with your implementation. Select which 
+Modify the code in GameOfLifeStarter.java to create a game of life with your implementation. Select which
 implementation of the View you want to use.
 
 # Points to look at
@@ -24,7 +24,7 @@ implementation of the View you want to use.
 - SOLID
 - Clean Code
 
- # If you want
+# If you want
 
 - Refactor the code
 - Choose another implementation for the board model

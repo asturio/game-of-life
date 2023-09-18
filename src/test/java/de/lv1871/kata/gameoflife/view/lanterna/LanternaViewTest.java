@@ -1,5 +1,10 @@
 package de.lv1871.kata.gameoflife.view.lanterna;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.when;
+
 import de.lv1871.kata.gameoflife.GameOfLife;
 import de.lv1871.kata.gameoflife.GameOfLifeException;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,13 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.when;
-
 @ExtendWith(org.mockito.junit.jupiter.MockitoExtension.class)
 class LanternaViewTest {
+
     @Mock
     private GameOfLife gameOfLife;
 
@@ -25,8 +26,8 @@ class LanternaViewTest {
     @Test
     void constructorWithNullArguments() {
         assertThatThrownBy(() -> new LanternaView(null))
-            .isInstanceOf(GameOfLifeException.class)
-            .hasMessage("GameOfLife must not be null");
+                .isInstanceOf(GameOfLifeException.class)
+                .hasMessage("GameOfLife must not be null");
     }
 
     @Test
@@ -66,9 +67,9 @@ class LanternaViewTest {
     @Test
     void noBoardException() {
         assertThatThrownBy(() ->
-            new LanternaView(gameOfLife))
-            .isInstanceOf(GameOfLifeException.class)
-            .hasMessageContaining("GameOfLife must have at least one row and one column");
+                new LanternaView(gameOfLife))
+                .isInstanceOf(GameOfLifeException.class)
+                .hasMessageContaining("GameOfLife must have at least one row and one column");
     }
 
 }
