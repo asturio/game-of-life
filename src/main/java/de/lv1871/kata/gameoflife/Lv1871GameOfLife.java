@@ -2,7 +2,7 @@ package de.lv1871.kata.gameoflife;
 
 public class Lv1871GameOfLife implements GameOfLife {
 
-    private final short[][] field;
+    private short[][] field;
 
     public Lv1871GameOfLife(short[][] field) {
         if (field == null) {
@@ -32,7 +32,26 @@ public class Lv1871GameOfLife implements GameOfLife {
 
     @Override
     public void evolute() {
-        // not implemented
+        short[][] nextGeneration = new short[getRows()][getColumns()];
+        for (int row = 0; row < getRows(); row++) {
+            for (int column = 0; column < getColumns(); column++) {
+                int liveNeighbours = countLiveNeighbours(row, column);
+                if (field[row][column] == 1) {
+                    if (liveNeighbours == 2 || liveNeighbours == 3) {
+                        nextGeneration[row][column] =1 ;
+                    } else {
+                        nextGeneration[row][column] = 0;
+                    }
+                } else {
+                    if (liveNeighbours == 3) {
+                        nextGeneration[row][column] = 1;
+                    } else {
+                        nextGeneration[row][column] = 0;
+                    }
+                }
+            }
+        }
+        field = nextGeneration;
 
     }
 
