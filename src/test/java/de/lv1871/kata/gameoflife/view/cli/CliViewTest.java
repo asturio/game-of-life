@@ -47,9 +47,10 @@ public class CliViewTest {
     @Test
     void playGame()  {
         // given
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         when(gameOfLife.getField()).thenReturn(new short[][]{{0}});
         when(gameOfLife.stillRunning()).thenReturn(true, false);
-        CliView view = new CliView(gameOfLife, System.out);
+        CliView view = new CliView(gameOfLife, new PrintStream(outContent));
         view.setDelayMillis(0);
         // then
         assertThatNoException().isThrownBy(view::playGame);
