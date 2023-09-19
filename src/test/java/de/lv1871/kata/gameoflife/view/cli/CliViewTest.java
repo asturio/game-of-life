@@ -40,7 +40,7 @@ public class CliViewTest {
                         +-+
                         | |
                         +-+
-                        ===
+                        == Generation 0
                         """);
     }
 
