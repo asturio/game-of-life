@@ -11,6 +11,8 @@ public class CliView implements GameOfLifeView {
     private final PrintStream printStream;
     private long delayMillis = 500;
 
+    private long generation = 0;
+
     public CliView(GameOfLife gameOfLife, PrintStream printStream) {
         this.gameOfLife = gameOfLife;
         this.printStream = printStream;
@@ -38,8 +40,8 @@ public class CliView implements GameOfLifeView {
     }
 
     private void drawSeparator() {
-        int cols = gameOfLife.getField()[0].length * 2 + 1;
-        printStream.println("=".repeat(cols));
+        String message = "== Generation " + generation++;
+        printStream.println(message);
     }
 
     @Override

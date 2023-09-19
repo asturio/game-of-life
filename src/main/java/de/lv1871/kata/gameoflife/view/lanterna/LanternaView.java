@@ -14,7 +14,9 @@ public class LanternaView implements GameOfLifeView {
 
     private final GameOfLife gameOfLife;
     private final Terminal terminal;
-    private long delayMillis = 500;
+    private long delayMillis = 100;
+
+    private long generation = 0;
 
     public LanternaView(GameOfLife gameOfLife) {
         this.gameOfLife = gameOfLife;
@@ -32,7 +34,7 @@ public class LanternaView implements GameOfLifeView {
     }
 
     private Terminal createTerminal() {
-        TerminalSize size = new TerminalSize(gameOfLife.getColumns() * 2 - 1, gameOfLife.getRows());
+        TerminalSize size = new TerminalSize(gameOfLife.getColumns() * 2 - 1, gameOfLife.getRows() + 1);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
         terminalFactory.setInitialTerminalSize(size);
         Terminal terminal;
@@ -55,6 +57,8 @@ public class LanternaView implements GameOfLifeView {
                 terminal.setCursorPosition(0, row++);
                 terminal.putString(fieldLine);
             }
+            terminal.setCursorPosition(0, gameOfLife.getRows());
+            terminal.putString("== Generation " + generation++);
             terminal.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -66,10 +70,12 @@ public class LanternaView implements GameOfLifeView {
     @Override
     public void playGame() {
         try {
+            terminal.enterPrivateMode();
             while (gameOfLife.stillRunning()) {
                 this.drawField();
                 gameOfLife.evolute();
             }
+            terminal.exitPrivateMode();
             terminal.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

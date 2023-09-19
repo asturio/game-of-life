@@ -2,6 +2,8 @@ package de.lv1871.kata.gameoflife;
 
 public class Lv1871GameOfLife implements GameOfLife {
 
+    public static final short ALIVE = 1;
+    public static final short DEAD = 0;
     private short[][] field;
 
     public Lv1871GameOfLife(short[][] field) {
@@ -13,6 +15,10 @@ public class Lv1871GameOfLife implements GameOfLife {
         }
         this.field = field;
 
+    }
+
+    private static boolean has2Or3LiveNeighbours(int liveNeighbours) {
+        return liveNeighbours == 2 || liveNeighbours == 3;
     }
 
     @Override
@@ -36,18 +42,11 @@ public class Lv1871GameOfLife implements GameOfLife {
         for (int row = 0; row < getRows(); row++) {
             for (int column = 0; column < getColumns(); column++) {
                 int liveNeighbours = countLiveNeighbours(row, column);
-                if (field[row][column] == 1) {
-                    if (liveNeighbours == 2 || liveNeighbours == 3) {
-                        nextGeneration[row][column] =1 ;
-                    } else {
-                        nextGeneration[row][column] = 0;
-                    }
+                if (field[row][column] == ALIVE) {
+                    nextGeneration[row][column] =
+                            has2Or3LiveNeighbours(liveNeighbours) ? ALIVE : DEAD;
                 } else {
-                    if (liveNeighbours == 3) {
-                        nextGeneration[row][column] = 1;
-                    } else {
-                        nextGeneration[row][column] = 0;
-                    }
+                    nextGeneration[row][column] = (liveNeighbours == 3) ? ALIVE : DEAD;
                 }
             }
         }
@@ -59,7 +58,7 @@ public class Lv1871GameOfLife implements GameOfLife {
     public boolean stillRunning() {
         for (short[] row : field) {
             for (short cell : row) {
-                if (cell == 1) {
+                if (cell == ALIVE) {
                     return true;
                 }
             }
