@@ -35,13 +35,14 @@ public class CliViewTest {
         // when
         view.drawField();
         // then
-        assertThat(outContent.toString()).isEqualTo(
-                """
-                        +-+
-                        | |
-                        +-+
-                        == Generation 0
-                        """);
+        String actual = outContent.toString().replaceAll("\r", "");
+        String expected = """
+                +-+
+                | |
+                +-+
+                == Generation 0
+                """;
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
