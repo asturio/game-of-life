@@ -5,6 +5,7 @@ public class Lv1871GameOfLife implements GameOfLife {
     public static final short ALIVE = 1;
     public static final short DEAD = 0;
     private short[][] field;
+    private long generation = 0;
 
     public Lv1871GameOfLife(short[][] field) {
         if (field == null) {
@@ -51,7 +52,7 @@ public class Lv1871GameOfLife implements GameOfLife {
             }
         }
         field = nextGeneration;
-
+        generation++;
     }
 
     @Override
@@ -64,6 +65,24 @@ public class Lv1871GameOfLife implements GameOfLife {
             }
         }
         return false;
+    }
+
+    @Override
+    public long getGeneration() {
+        return generation;
+    }
+
+    @Override
+    public double getLifePercentage() {
+        long liveCells = 0;
+        for (short[] rows : field) {
+            for (short cell : rows) {
+                if (cell == ALIVE) {
+                    liveCells++;
+                }
+            }
+        }
+        return (double) liveCells / (getColumns() * getRows()) * 100d;
     }
 
     public int countLiveNeighbours(int row, int column) {

@@ -2,6 +2,7 @@ package de.lv1871.kata.gameoflife;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.junit.jupiter.params.provider.Arguments.of;
 
 import java.util.stream.Stream;
@@ -11,7 +12,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class GameOfLifeTest {
-
 
     public static Stream<Arguments> evoluteCenterCell() {
         short DEAD = 0;
@@ -100,10 +100,38 @@ class GameOfLifeTest {
     void evolute_shouldChangeCenterCell(short[][] field, short expected) {
         // given
         GameOfLife gameOfLife = new Lv1871GameOfLife(field);
+        assumeThat(gameOfLife.getGeneration()).isZero();
         // when
         gameOfLife.evolute();
         // then
         assertThat(gameOfLife.getField()[1][1]).isEqualTo(expected);
+        assertThat(gameOfLife.getGeneration()).isEqualTo(1);
+    }
+
+    @Test
+    void generateRandomField_shouldGenerateRandomField() {
+        // given
+        int rows = 13;
+        int columns = 42;
+        // when
+        short[][] field = GameOfLife.generateRandomField(rows, columns);
+        // then
+        assertThat(field.length).isEqualTo(rows);
+        assertThat(field[0].length).isEqualTo(columns);
+        assertThat(field).isNotEqualTo(GameOfLife.generateRandomField(rows, columns));
+    }
+
+    @Test
+    void generateRandomFieldWithInvalidParamters_shouldGenerateRandomField() {
+        // given
+        int rows = -2;
+        int columns = 0;
+        // when
+        short[][] field = GameOfLife.generateRandomField(rows, columns);
+        // then
+        assertThat(field.length).isEqualTo(20);
+        assertThat(field[0].length).isEqualTo(40);
+        assertThat(field).isNotEqualTo(GameOfLife.generateRandomField(rows, columns));
     }
 
 }

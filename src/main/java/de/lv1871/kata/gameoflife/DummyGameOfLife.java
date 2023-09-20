@@ -23,7 +23,7 @@ public class DummyGameOfLife implements GameOfLife {
     };
 
     private short[][] currentField = shortsField1;
-    private int generations = 0;
+    private int generation = 0;
 
     @Override
     public int getRows() {
@@ -47,11 +47,17 @@ public class DummyGameOfLife implements GameOfLife {
         } else {
             currentField = shortsField1;
         }
+        generation++;
     }
 
     @Override
     public boolean stillRunning() {
-        generations++;
-        return generations < MAX_GENERATIONS;
+        return getGeneration() < MAX_GENERATIONS;
     }
+
+    @Override
+    public long getGeneration() {
+        return generation;
+    }
+
 }

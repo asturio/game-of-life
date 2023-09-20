@@ -36,17 +36,27 @@ class DummyGameOfLifeTest {
         // Evolute once
         game.evolute();
         assertThat(game.getField()).isEqualTo(game.shortsField2);
+        assertThat(game.getGeneration()).isEqualTo(1);
         // Evolute twice
         game.evolute();
         assertThat(game.getField()).isEqualTo(game.shortsField1);
-
+        assertThat(game.getGeneration()).isEqualTo(2);
     }
 
     @Test
     void stillRunning() {
         for (int i = 0; i < 9; i++) {
-            assertThat(game.stillRunning()).isTrue();
+            game.evolute();
+            assertThat(game.stillRunning()).as("i = " + i).isTrue();
+            assertThat(game.getGeneration()).isEqualTo(i + 1);
         }
+        game.evolute();
         assertThat(game.stillRunning()).isFalse();
+        assertThat(game.getGeneration()).isEqualTo(10);
+    }
+
+    @Test
+    void getLifePercentage() {
+        assertThat(game.getLifePercentage()).isEqualTo(0);
     }
 }

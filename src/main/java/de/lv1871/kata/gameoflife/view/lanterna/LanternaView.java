@@ -15,8 +15,7 @@ public class LanternaView implements GameOfLifeView {
     private final GameOfLife gameOfLife;
     private final Terminal terminal;
     private long delayMillis = 100;
-
-    private long generation = 0;
+    private double evoluteDuration = -1;
 
     public LanternaView(GameOfLife gameOfLife) {
         this.gameOfLife = gameOfLife;
@@ -34,7 +33,9 @@ public class LanternaView implements GameOfLifeView {
     }
 
     private Terminal createTerminal() {
-        TerminalSize size = new TerminalSize(gameOfLife.getColumns() * 2 - 1, gameOfLife.getRows() + 1);
+        int columns = gameOfLife.getColumns() * 2 - 1;
+        columns = Math.max(columns, 70); // columns must be at least 80 for the status line
+        TerminalSize size = new TerminalSize(columns, gameOfLife.getRows() + 1);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
         terminalFactory.setInitialTerminalSize(size);
         Terminal terminal;
@@ -58,7 +59,10 @@ public class LanternaView implements GameOfLifeView {
                 terminal.putString(fieldLine);
             }
             terminal.setCursorPosition(0, gameOfLife.getRows());
-            terminal.putString("== Generation " + generation++);
+            terminal.putString(
+                    "== Generation %d (evolute took %.2f ms, life percentage %.2f %%) =="
+                            .formatted(gameOfLife.getGeneration(), evoluteDuration,
+                                    gameOfLife.getLifePercentage()));
             terminal.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -71,9 +75,12 @@ public class LanternaView implements GameOfLifeView {
     public void playGame() {
         try {
             terminal.enterPrivateMode();
+            long evoluteStart;
             while (gameOfLife.stillRunning()) {
                 this.drawField();
+                evoluteStart = System.nanoTime();
                 gameOfLife.evolute();
+                evoluteDuration = (System.nanoTime() - evoluteStart) / 1E6;
             }
             terminal.exitPrivateMode();
             terminal.close();

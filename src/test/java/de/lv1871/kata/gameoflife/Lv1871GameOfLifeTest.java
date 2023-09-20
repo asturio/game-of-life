@@ -123,6 +123,32 @@ class Lv1871GameOfLifeTest {
                 );
     }
 
+    @Test
+    void lifePercentage_shouldReturnZeroForEmptyField() {
+        // given
+        short[][] field = new short[][]{{0}};
+        Lv1871GameOfLife gameOfLife = new Lv1871GameOfLife(field);
+        // then
+        assertThat(gameOfLife.getLifePercentage()).isEqualTo(0);
+    }
+
+    @Test
+    void lifePercentage_shouldReturnOneForOneLifeField() {
+        // given
+        short[][] field = new short[][]{{1}};
+        Lv1871GameOfLife gameOfLife = new Lv1871GameOfLife(field);
+        // then
+        assertThat(gameOfLife.getLifePercentage()).isEqualTo(100);
+    }
+
+    @Test
+    void lifePercentage_shouldReturn40Percent() {
+        // given
+        short[][] field = new short[][]{{0, 1, 0, 1, 0}};
+        Lv1871GameOfLife gameOfLife = new Lv1871GameOfLife(field);
+        // then
+        assertThat(gameOfLife.getLifePercentage()).isEqualTo(40);
+    }
 
 
 }
